@@ -1,6 +1,8 @@
 # SocAuto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.4.
+This is my SoftUni graduate project developed with Angular 12. 
+
+**SocAuto** is an Angular front-end application (SPA) for viewing and managing socialistic automobile listings. The application allows visitors to browse through different automobile listings. Users may register with a username and password, which allows them to create their own listings. Listing authors can also edit or delete their own publications at any time.
 
 ## Development server
 
