@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 64px;
+}
+
+#profile, #guest {
+    display: none;
+}
