@@ -1,8 +1,8 @@
 # SocAuto
 
-This is my SoftUni graduate project developed with Angular 12. 
+SoftUni graduate project developed with Angular 12. 
 
-**SocAuto** is an Angular front-end application (SPA) for viewing and managing socialistic automobile listings. The application allows visitors to browse through different automobile listings. Users may register with a username and password, which allows them to create their own listings. Listing authors can also edit or delete their own publications at any time.
+**SocAuto** is an Angular front-end app (SPA) for viewing and managing socialistic automobile listings. The application allows visitors to browse through different automobile listings. Users may register with a username and password, which allows them to create their own listings. Listing authors can also edit or delete their own publications at any time.
 
 ## Development server
 
