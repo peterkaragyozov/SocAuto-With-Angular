@@ -1,116 +1,156 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ICar } from './shared/interfaces/car';
 
-const appKey = 'kid_BkREFei8m'; // APP KEY HERE;
-const appSecret = '0d7ba5cd67b749c58d2c49d02a5ec7ec'; // APP SECRET HERE;
-const userId = localStorage.getItem('_id');
-const username = localStorage.getItem('username');
-const createListingUrl = `https://baas.kinvey.com/appdata/${appKey}/cars`;
-const getAllListingsUrl = `https://baas.kinvey.com/appdata/${appKey}/cars?query={}&sort={"_kmd.ect": -1}`;
+
+const userId = localStorage.getItem('user');
 const host = 'https://parseapi.back4app.com';
 
 @Injectable()
 export class ListingService {
   constructor(private http: HttpClient) {}
 
-  create(model) {
-    return this.http.post(createListingUrl, model);
+  createListing(listing: ICar) {
+    const userId = getUserData().objectId;
+    // addOwner(listing);
+    return this.http.post(host + '/classes/Automobile', listing, { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
   }
 
-  edit(id, model) {
-    console.log(id, model);
-    return this.http.put(
-      `https://baas.kinvey.com/appdata/${appKey}/cars/${id}`,
-      model
-    );
+  editListing(id: string, listing: ICar) {
+    return this.http.put(host + '/classes/Automobile/' + id, listing, { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
   }
-  getUserListings(user) {
-    return this.http.get(
-      `https://baas.kinvey.com/appdata/${appKey}/cars?query={"seller":"${user}"}&sort={"_kmd.ect": -1}`
-    );
+
+  getMyListings(userId: string) {
+    const query = JSON.stringify({owner: createPointer('_User', userId)});
+    return this.http.get(host + '/classes/Automobile?where=' + query, { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
   }
 
   getAllListings() {
-    return this.http.get(host + `/classes/Automobile`);
+    return this.http.get<ICar[]>(host + `/classes/Automobile`, { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
   }
 
-  getListingDetails(carId) {
-    return this.http.get(
-      `https://baas.kinvey.com/appdata/${appKey}/cars/${carId}`
-    );
+  getListingDetails(id: string) {
+    return this.http.get(host + '/classes/Automobile/' + id + '?include=owner', { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
   }
 
-  deleteListing(carId) {
-    return this.http.delete(
-      `https://baas.kinvey.com/appdata/${appKey}/cars/${carId}`
-    );
+  deleteListing(id: string) {
+    return this.http.delete(host + '/classes/Automobile/' + id, { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
   }
+
+  search(query: string) {
+    return this.http.get(host + '/classes/Automobile?where=' + `{"year":${query}}`, { 
+      headers: {
+        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+      }
+    });
+  }
+
 
 }
 
 
-// function createPointer(name, id) {
-//   return {
-//       __type: 'Pointer', 
-//       className: name,
-//       objectId: id 
-//       }
+
+
+
+export function getUserData() {
+  const user = sessionStorage.getItem('user');
+  if (user) {
+      return JSON.parse(user);
+  } else {
+      return undefined;
+  }
+}
+
+// export function setUserData(user) {
+//   sessionStorage.setItem('user', JSON.stringify(user));
 // }
 
-// function addOwner(object) {
-//   const userId = getUserData().objectId;
-//   object.owner = createPointer('_User', userId);
-  
+export function clearUserData() {
+  sessionStorage.removeItem('user');
+}
+
+
+
+
+// // authentication function (login/register/logout)
+// export async function login(username, password) {
+//   const result = await post(settings.host + '/login', { username, password });
+//   setUserData(result);
+//   return result;
 // }
+
+// export async function register(email, username, password) {
+//   const result = await post(settings.host + '/users', { email, username, password });
+//   setUserData(result);
+//   return result;
+// }
+
+// export function logout() {
+//   const result = post(settings.host + '/logout', {});
+//   clearUserData();
+//   return result;
+// }
+
+function createPointer(name: string, id: string) {
+    return {
+        __type: 'Pointer', 
+        className: name,
+        objectId: id 
+        }
+}
+
+// function addOwner(object) {
+//     const userId = getUserData().objectId;
+//     object.owner = createPointer('_User', userId);   
+// }
+
+
 
 // //Application-specific requests
 
 // //get all listings
 // export async function getAllListings(startIndex, itemsPerPage) {
-//   // ?order=createdAt&skip=${page}&limit=6
-//   const response = await api.get(host + `/classes/Automobile`);
-//   const results = response.results
-//   const sortedResult = results.sort(function(a, b){ return b.createdAt.localeCompare(a.createdAt) });
-//   const toReturn = sortedResult.slice(startIndex, startIndex + itemsPerPage);
-//   return toReturn;
+//     // ?order=createdAt&skip=${page}&limit=6
+//     const response = await api.get(host + `/classes/Automobile`);
+//     const results = response.results
+//     const sortedResult = results.sort(function(a, b){ return b.createdAt.localeCompare(a.createdAt) });
+//     const toReturn = sortedResult.slice(startIndex, startIndex + itemsPerPage);
+//     return toReturn;
 // }
 
 // //for pagination
 // export async function getCollectionSize() {
-//   const response = await api.get(host + '/classes/Automobile?count=1');
-//   return response.count;
-// }
-
-// //get listing by id
-// export async function getListingById(id) {
-//   return await api.get(host + '/classes/Automobile/' + id + '?include=owner');
-// }
-
-// //create listing
-// export async function createListing(listing) {
-//   const userId = getUserData().objectId;
-//   addOwner(listing);
-//   return await api.post(host + '/classes/Automobile', listing);
-// }
-
-// //edit listing by id
-// export async function updateListing(id, listing) {
-//   return await api.put(host + '/classes/Automobile/' + id, listing);
-// }
-
-// //delete listing by id
-// export async function deleteListing(id) {
-//   return await api.del(host + '/classes/Automobile/' + id);
-// }
-
-// //get my listings
-// export async function getMyListings(userId) {
-//   const query = JSON.stringify({owner: createPointer('_User', userId)});
-//   const result = await api.get(host + '/classes/Automobile?where=' + query);
-//   return result.results;
-// }
-
-// export async function search(query) {
-//   const result = await api.get(host + '/classes/Automobile?where=' + `{"year":${query}}`);
-//   return result.results;
+//     const response = await api.get(host + '/classes/Automobile?count=1');
+//     return response.count;
 // }

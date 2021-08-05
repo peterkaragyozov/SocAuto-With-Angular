@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { ListingService } from './listing.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { CatalogComponent } from './catalog/catalog.component';
     AppRoutingModule,
     CoreModule
   ],
-  providers: [],
+  providers: [
+    ListingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

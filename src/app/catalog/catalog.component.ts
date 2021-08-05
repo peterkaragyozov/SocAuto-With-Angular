@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ListingService } from '../listing.service';
+import { ICar } from '../shared/interfaces/car';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent {
 
-  constructor() { }
+  listings: ICar[] | undefined;
 
-  ngOnInit(): void {
+  constructor( private listingService: ListingService) { 
+    this.fetchListings();
+  }
+
+  fetchListings(): void {
+    this.listings = undefined;
+    this.listingService.getAllListings().subscribe(listings => this.listings = listings);
   }
 
 }
