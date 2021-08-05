@@ -1,3 +1,11 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    font-size: 2em;
+}
+
+
 .listings {
     margin: auto;
     text-align: center;
