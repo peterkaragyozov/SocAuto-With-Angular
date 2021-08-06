@@ -20,7 +20,7 @@ export class UserService {
     }
   }
 
-  login(email: string, password: string): void {
+  login(username: string, password: string): void {
     this.user = {
       username: 'Peter',
       email: 'peter@gmail.com',

@@ -1,19 +1,45 @@
 <section id="register">
     <div class="container">
-        <form id="register-form">
+        <form #form="ngForm" id="register-form">
             <h1>Register</h1>
             <p>Please fill in this form to create an account.</p>
             <hr>
+
             <p>Username</p>
-            <input type="text" placeholder="Enter Username" name="username">
+            <input #usernameInput="ngModel" ngModel type="text" placeholder="Enter Username" name="username" required minlength="4">
+            <ng-container *ngIf="usernameInput.touched">
+                <p *ngIf="usernameInput.errors?.required" class="error">Username is required!</p>
+                <p *ngIf="usernameInput.errors?.minlength" class="error">Username must be at least 4 characters long!</p>
+                <br>
+            </ng-container>
+
             <p>Email</p>
-            <input type="text" placeholder="Enter Email" name="email">
+            <input #emailInput="ngModel" ngModel type="text" placeholder="Enter Email" name="email" required email>
+            <ng-container *ngIf="emailInput.touched">
+                <p *ngIf="emailInput.errors?.required" class="error">Email is required!</p>
+                <p *ngIf="emailInput.errors?.email" class="error">Email is invalid!</p>
+                <br>
+            </ng-container>
+
             <p>Password</p>
-            <input type="password" placeholder="Enter Password" name="password">
+            <input #passwordInput="ngModel" ngModel type="password" placeholder="Enter Password" name="password" required minlength="6">
+            <ng-container *ngIf="passwordInput.touched">
+                <p *ngIf="passwordInput.errors?.required" class="error">Password is required!</p>
+                <p *ngIf="passwordInput.errors?.minlength" class="error">Password must be at least 6 characters long!</p>
+                <br>
+            </ng-container>
+
             <p>Repeat Password</p>
-            <input type="password" placeholder="Repeat Password" name="repeatPass">
+            <input #repeatPassInput="ngModel" ngModel type="password" placeholder="Repeat Password" name="repeatPass" required minlength="6">
+            <ng-container *ngIf="repeatPassInput.touched">
+                <p *ngIf="repeatPassInput.errors?.required" class="error">Repeat password is required!</p>
+                <p *ngIf="repeatPassInput.errors?.minlength" class="error">Repeat password does not match password!</p>
+                <br>
+            </ng-container>
             <hr>
+
             <input type="submit" class="registerbtn" value="Register">
+
         </form>
         <div class="signin">
             <p>Already have an account?

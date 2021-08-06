@@ -1,14 +1,28 @@
 <section id="login">
     <div class="container">
-        <form id="login-form">
+        <form #form="ngForm" id="login-form">
             <h1>Login</h1>
             <p>Please enter your credentials.</p>
             <hr>
+            
             <p>Username</p>
-            <input #usernameInput placeholder="Enter Username" name="username" type="text">
+            <input #usernameInput="ngModel" ngModel placeholder="Enter Username" name="username" type="text" required minlength="4">
+            <ng-container *ngIf="usernameInput.touched">
+                <p *ngIf="usernameInput.errors?.required" class="error">Username is required!</p>
+                <p *ngIf="usernameInput.errors?.minlength" class="error">Username must be at least 4 characters long!</p>
+                <br>
+            </ng-container>
+            
             <p>Password</p>
-            <input #passwordInput type="password" placeholder="Enter Password" name="password">
+            <input #passwordInput="ngModel" ngModel type="password" placeholder="Enter Password" name="password" required minlength="6">
+            <ng-container *ngIf="passwordInput.touched">
+                <p *ngIf="passwordInput.errors?.required" class="error">Password is required!</p>
+                <p *ngIf="passwordInput.errors?.minlength" class="error">Password must be at least 6 characters long!</p>
+                <br>
+            </ng-container>
+
             <input (click)="login(usernameInput.value, passwordInput.value)" type="submit" class="registerbtn" value="Login">
+            
         </form>
         <div class="signin">
             <p>Dont have an account?
