@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { EditComponent } from './edit/edit.component';
     SearchComponent,
     CreateComponent,
     DetailsComponent,
-    EditComponent
+    EditComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

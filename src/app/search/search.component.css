@@ -1,5 +1,6 @@
 #search-cars {
   text-align: center;
+  margin: 30px;
 }
 
 h1 {
@@ -9,8 +10,11 @@ h1 {
 #search-input {
   display: block;
   width: 400px;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: rgb(241, 241, 241);
+  border: none;
+  border-radius: 2px;
 }
 
 .searchCars {

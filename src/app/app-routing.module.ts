@@ -6,6 +6,7 @@ import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
@@ -14,10 +15,12 @@ const routes: Routes = [
     pathMatch: 'full',
     component: HomeComponent,
   },
+
   {
     path: 'all-listings',
     component: CatalogComponent,
   },
+
   {
     path: 'details',
     children: [
@@ -27,6 +30,7 @@ const routes: Routes = [
       },
     ],
   },
+
   {
     path: 'create',
     component: CreateComponent,
@@ -36,6 +40,7 @@ const routes: Routes = [
       authenticationFailureRedirectUrl: '/login',
     },
   },
+
   {
     path: 'edit',
     children: [
@@ -50,10 +55,15 @@ const routes: Routes = [
       },
     ],
   },
+
   {
     path: 'search',
     component: SearchComponent,
   },
+
+  { path: '**',
+  component: NotFoundComponent,
+  }
 ];
 
 @NgModule({
