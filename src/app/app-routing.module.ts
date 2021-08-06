@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CatalogComponent } from './catalog/catalog.component';
+import { AuthActivate } from './core/guards/auth.activate';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
@@ -10,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: HomeComponent,
   },
   {
@@ -23,15 +25,30 @@ const routes: Routes = [
         path: ':carId',
         component: DetailsComponent,
       },
-    ]
+    ],
   },
   {
     path: 'create',
     component: CreateComponent,
+    canActivate: [AuthActivate],
+    data: {
+      authenticationRequired: true,
+      authenticationFailureRedirectUrl: '/login',
+    },
   },
   {
     path: 'edit',
-    component: EditComponent,
+    children: [
+      {
+        path: ':carId',
+        component: EditComponent,
+        canActivate: [AuthActivate],
+        data: {
+          authenticationRequired: true,
+          authenticationFailureRedirectUrl: '/login',
+        },
+      },
+    ],
   },
   {
     path: 'search',

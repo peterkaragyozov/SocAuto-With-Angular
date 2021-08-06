@@ -5,10 +5,10 @@
             <p>Please enter your credentials.</p>
             <hr>
             <p>Username</p>
-            <input placeholder="Enter Username" name="username" type="text">
+            <input #usernameInput placeholder="Enter Username" name="username" type="text">
             <p>Password</p>
-            <input type="password" placeholder="Enter Password" name="password">
-            <input type="submit" class="registerbtn" value="Login">
+            <input #passwordInput type="password" placeholder="Enter Password" name="password">
+            <input (click)="login(usernameInput.value, passwordInput.value)" type="submit" class="registerbtn" value="Login">
         </form>
         <div class="signin">
             <p>Dont have an account?

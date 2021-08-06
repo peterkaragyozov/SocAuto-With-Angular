@@ -5,16 +5,16 @@
         <a routerLink="/all-listings">All Automobiles</a>
         <a routerLink="/search">By Year</a>
         <!-- Guest users -->
-        <div id="guest">
+        <div *ngIf="!isLogged" id="guest">
             <a routerLink="/login">Login</a>
             <a routerLink="/register">Register</a>
         </div>
         <!-- Logged users -->
-        <div id="profile">
-            <a id="user-greeting">Welcome username</a>
+        <div *ngIf="isLogged" id="profile">
+            <a id="user-greeting">Welcome, {{username}}</a>
             <a routerLink="/profile">My Listings</a>
             <a routerLink="/create">Create Listing</a>
-            <a id="logoutBtn" href="javascript:void(0)">Logout</a>
+            <a (click)="logout()" id="logoutBtn">Logout</a>
         </div>
     </nav>
 </header>
