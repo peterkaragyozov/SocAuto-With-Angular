@@ -9,19 +9,26 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { ListingService } from './listing.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './search/search.component';
+import { UserModule } from './user/user.module';
+import { CreateComponent } from './create/create.component';
+import { DetailsComponent } from './details/details.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CatalogComponent,
-    SearchComponent
+    SearchComponent,
+    CreateComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    UserModule
   ],
   providers: [
     ListingService
