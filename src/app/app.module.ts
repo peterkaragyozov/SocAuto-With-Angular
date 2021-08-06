@@ -30,9 +30,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     CoreModule,
-    UserModule
+    UserModule,
+    AppRoutingModule
   ],
   providers: [
     ListingService

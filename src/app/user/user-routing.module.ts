@@ -4,7 +4,6 @@ import { AuthActivate } from '../core/guards/auth.activate';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
-import { NotFoundComponent } from '../not-found/not-found.component'
 
 const routes: Routes = [
   {
@@ -37,10 +36,6 @@ const routes: Routes = [
     },
   },
 
-  {
-    path: '**',
-    component: NotFoundComponent,
-  },
 ];
 
 @NgModule({
