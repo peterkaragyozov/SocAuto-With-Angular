@@ -12,6 +12,7 @@ import { SearchComponent } from './search/search.component';
 import { UserModule } from './user/user.module';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DetailsComponent } from './details/details.component';
     CatalogComponent,
     SearchComponent,
     CreateComponent,
-    DetailsComponent
+    DetailsComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

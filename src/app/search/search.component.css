@@ -1,4 +1,12 @@
-.searchCars input {
+#search-cars {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+#search-input {
   display: block;
   width: 400px;
   margin-right: auto;
@@ -13,4 +21,18 @@
   flex-flow: column wrap;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.button-list {
+  background-color: #e41616;
+  /* Red */
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
 }
