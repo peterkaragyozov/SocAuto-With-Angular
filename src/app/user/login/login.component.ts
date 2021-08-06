@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,13 +9,16 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent{
 
-  constructor(private userService: UserService,
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private router: Router
     ) { }
 
   login(username: string, password: string): void {
     this.userService.login(username, password);
-    this.router.navigate(['/all-listings']);
+    const redirectUrl = this.activatedRoute.snapshot.queryParams.redirectUrl || '/all-listings';
+    this.router.navigate([redirectUrl]);
   }
 
 }
