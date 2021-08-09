@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ListingService } from 'src/app/listing.service';
 
 @Component({
   selector: 'app-create',
@@ -7,9 +10,22 @@ import { Component } from '@angular/core';
 })
 export class CreateComponent {
 
-  constructor() { }
+  constructor(
+    private listingService: ListingService,
+    private router: Router
+  ) { }
 
-  create(): void {
+  create(form: NgForm): void {
+    if (form.invalid) { return; }
+    this.listingService.createListing(form.value).subscribe({
+      next: () => {
+        this.router.navigate(['/all-listings']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
+
 
 }
