@@ -5,77 +5,53 @@ import { ICar } from './shared/interfaces/car';
 
 const userId = localStorage.getItem('user');
 const host = 'https://parseapi.back4app.com';
+const headers = { 
+  headers: {
+    'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
+    'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
+  }
+}
 
 @Injectable()
 export class ListingService {
   constructor(private http: HttpClient) {}
 
+  getAllListings() {
+    const result = this.http.get<ICar[]>(host + `/classes/Automobile`, headers);
+    return result;
+  }
+
+  getListingDetails(id: string) {
+    const result = this.http.get(host + '/classes/Automobile/' + id + '?include=owner', headers);
+    return result;
+  }
+
   createListing(listing: ICar) {
     const userId = getUserData().objectId;
     // addOwner(listing);
-    return this.http.post(host + '/classes/Automobile', listing, { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
+    const result = this.http.post(host + '/classes/Automobile', listing, headers);
+    return result;
   }
 
   editListing(id: string, listing: ICar) {
-    return this.http.put(host + '/classes/Automobile/' + id, listing, { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
+    const result = this.http.put(host + '/classes/Automobile/' + id, listing, headers);
+    return result;
+  }
+  
+  deleteListing(id: string) {
+    return this.http.delete(host + '/classes/Automobile/' + id, headers);
   }
 
   getMyListings(userId: string) {
     const query = JSON.stringify({owner: createPointer('_User', userId)});
-    return this.http.get(host + '/classes/Automobile?where=' + query, { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
-  }
-
-  getAllListings() {
-    return this.http.get<ICar[]>(host + `/classes/Automobile`, { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
-  }
-
-  getListingDetails(id: string) {
-    return this.http.get(host + '/classes/Automobile/' + id + '?include=owner', { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
-  }
-
-  deleteListing(id: string) {
-    return this.http.delete(host + '/classes/Automobile/' + id, { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
+    const result = this.http.get(host + '/classes/Automobile?where=' + query, headers)
+    return result;
   }
 
   search(query: string) {
-    return this.http.get(host + '/classes/Automobile?where=' + `{"year":${query}}`, { 
-      headers: {
-        'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-        'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-      }
-    });
+    const result = this.http.get(host + '/classes/Automobile?where=' + `{"year":${query}}`, headers);
+    return result;
   }
-
 
 }
 
