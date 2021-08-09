@@ -7,6 +7,7 @@ import { ICar } from '../shared/interfaces/car';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
+
 export class CatalogComponent {
 
   listings: ICar[] | undefined;

@@ -14,7 +14,7 @@ const headers = {
 @Injectable()
 export class UserService {
 
-  user: IUser | undefined;
+  user: IUser | null | undefined = undefined;
 
   get isLogged(): boolean {
     return !!this.user;
@@ -37,22 +37,15 @@ export class UserService {
   //   }
   // }
 
-  login(username: string, password: string): void {
-    this.user = {
-      username: 'Peter',
-      email: 'peter@gmail.com',
-      password: '123456'
-    }
-
-    // this.localStorage.setItem('<USER>', JSON.stringify(this.user));
+  login(data: { username: string; password: string }) {
+    return this.http.post<IUser>(host + '/login', data, headers);
   }
 
   register(data: { username: string; email: string; password: string }) {
     return this.http.post(host + '/users', data, headers);
   }
 
-  logout(): void {
-    this.user = undefined;
-    // this.localStorage.removeItem('<USER>');
+  logout() {
+    return this.http.post<IUser>(host + '/logout', {}, headers);
   }
 }
