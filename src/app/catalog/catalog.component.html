@@ -9,7 +9,7 @@
     ${page < pages ? html`<a class="button-list" href="/all-listings?page=${page + 1}"> &gt; </a>` : ''}
     </div> -->
 
-    <!-- Display all records -->
+    <!-- Display all listings -->
 
     <div *ngIf="!listings">Loading... Please wait!</div>
 
@@ -29,8 +29,8 @@
       </div>
     </div>
 
-    <!-- Display if there are no records -->
-    <p *ngIf="listings" class="no-cars">No cars in database.</p>
+    <!-- Display if there are no listings -->
+    <p *ngIf="!listings" class="no-cars">No cars in database.</p>
 
     <!-- <div>
         ${page > 1 ? html`<a class="button-list" href="/all-listings?page=${page - 1}">&lt; Previous </a>` : ''}

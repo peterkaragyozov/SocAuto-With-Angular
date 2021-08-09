@@ -5,11 +5,13 @@ import { ICar } from './shared/interfaces/car';
 
 const userId = localStorage.getItem('user');
 const host = 'https://parseapi.back4app.com';
-const headers = { 
+const options = { 
   headers: {
     'X-Parse-Application-Id': '6H3iTk0euavDwf60foOsTImMVczZPRVdLlDDyxPI',
-    'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU'
-  }
+    'X-Parse-REST-API-Key': 'jhtq0fFqz3ghVVgQLhLf0uPMcVUALCOmoZwLk3WU',
+    'X-Parse-Session-Token': ''
+  },
+  withCredentials: true
 }
 
 @Injectable()
@@ -17,39 +19,39 @@ export class ListingService {
   constructor(private http: HttpClient) {}
 
   getAllListings() {
-    const result = this.http.get<ICar[]>(host + `/classes/Automobile`, headers);
+    const result = this.http.get<ICar[]>(host + `/classes/Automobile`, options);
     return result;
   }
 
   getListingDetails(id: string) {
-    const result = this.http.get(host + '/classes/Automobile/' + id + '?include=owner', headers);
+    const result = this.http.get(host + '/classes/Automobile/' + id + '?include=owner', options);
     return result;
   }
 
   createListing(listing: ICar) {
     const userId = getUserData().objectId;
     // addOwner(listing);
-    const result = this.http.post(host + '/classes/Automobile', listing, headers);
+    const result = this.http.post(host + '/classes/Automobile', listing, options);
     return result;
   }
 
   editListing(id: string, listing: ICar) {
-    const result = this.http.put(host + '/classes/Automobile/' + id, listing, headers);
+    const result = this.http.put(host + '/classes/Automobile/' + id, listing, options);
     return result;
   }
   
   deleteListing(id: string) {
-    return this.http.delete(host + '/classes/Automobile/' + id, headers);
+    return this.http.delete(host + '/classes/Automobile/' + id, options);
   }
 
   getMyListings(userId: string) {
     const query = JSON.stringify({owner: createPointer('_User', userId)});
-    const result = this.http.get(host + '/classes/Automobile?where=' + query, headers)
+    const result = this.http.get(host + '/classes/Automobile?where=' + query, options)
     return result;
   }
 
   search(query: string) {
-    const result = this.http.get(host + '/classes/Automobile?where=' + `{"year":${query}}`, headers);
+    const result = this.http.get(host + '/classes/Automobile?where=' + `{"year":${query}}`, options);
     return result;
   }
 
@@ -115,7 +117,7 @@ function createPointer(name: string, id: string) {
 
 // //Application-specific requests
 
-// //get all listings
+// //get all listings with pagination
 // export async function getAllListings(startIndex, itemsPerPage) {
 //     // ?order=createdAt&skip=${page}&limit=6
 //     const response = await api.get(host + `/classes/Automobile`);
