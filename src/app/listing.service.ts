@@ -70,35 +70,6 @@ export function getUserData() {
   }
 }
 
-// export function setUserData(user) {
-//   sessionStorage.setItem('user', JSON.stringify(user));
-// }
-
-export function clearUserData() {
-  sessionStorage.removeItem('user');
-}
-
-
-
-
-// // authentication function (login/register/logout)
-// export async function login(username, password) {
-//   const result = await post(settings.host + '/login', { username, password });
-//   setUserData(result);
-//   return result;
-// }
-
-// export async function register(email, username, password) {
-//   const result = await post(settings.host + '/users', { email, username, password });
-//   setUserData(result);
-//   return result;
-// }
-
-// export function logout() {
-//   const result = post(settings.host + '/logout', {});
-//   clearUserData();
-//   return result;
-// }
 
 function createPointer(name: string, id: string) {
     return {

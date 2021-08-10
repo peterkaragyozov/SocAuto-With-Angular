@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { LocalStorage } from '../core/injection-tokens';
+import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { IUser } from '../shared/interfaces/user';
 
@@ -29,14 +28,17 @@ export class UserService {
    }
 
   login(data: { username: string; password: string }) {
+    // sessionStorage.setItem('user', JSON.stringify(data));
     return this.http.post<IUser>(host + '/login', data, options).pipe(tap((user) => this.user = user));
   }
 
   register(data: { username: string; email: string; password: string }) {
+    // sessionStorage.setItem('user', JSON.stringify(data));
     return this.http.post<IUser>(host + '/users', data, options).pipe(tap((user) => this.user = user));
   }
 
   logout() {
+    // sessionStorage.removeItem('user');
     return this.http.post<IUser>(host + '/logout', {}, options).pipe(tap(() => this.user = null));
   }
   
