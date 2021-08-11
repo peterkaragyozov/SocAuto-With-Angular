@@ -18,7 +18,6 @@ export class RegisterComponent {
     ) { }
 
   register(form: NgForm): void {
-    if (form.invalid) { return; }
     const { username, email, password } = form.value;
     this.userService.register({ username, email, password }).subscribe({
       next: () => {

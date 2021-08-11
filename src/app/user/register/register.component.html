@@ -33,7 +33,7 @@
             <input #repeatPassInput="ngModel" ngModel type="password" placeholder="Repeat Password" name="repeatPass" required minlength="6">
             <ng-container *ngIf="repeatPassInput.touched">
                 <p *ngIf="repeatPassInput.errors?.required" class="error">Repeat password is required!</p>
-                <p *ngIf="repeatPassInput.errors?.minlength" class="error">Repeat password does not match password!</p>
+                <p *ngIf="repeatPassInput.value != passwordInput.value && repeatPassInput.value && passwordInput.value" class="error">Repeat password does not match password!</p>
                 <br>
             </ng-container>
             <hr>
