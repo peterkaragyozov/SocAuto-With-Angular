@@ -18,9 +18,11 @@ export class RegisterComponent {
     ) { }
 
   register(form: NgForm): void {
+    if (form.invalid) { return; }
     const { username, email, password } = form.value;
     this.userService.register({ username, email, password }).subscribe({
       next: () => {
+        this.userService.getMyProfile().subscribe();
         const redirectUrl = this.activatedRoute.snapshot.queryParams.redirectUrl || '/all-listings';
         this.router.navigate([redirectUrl]);
       },

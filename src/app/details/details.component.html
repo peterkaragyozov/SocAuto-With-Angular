@@ -1,5 +1,3 @@
-<p>details works!</p>
-
 <section id="listing-details">
     <h1>Details</h1>
     <div class="details-info">
@@ -13,9 +11,9 @@
         </ul>
         <p class="description-para">{{listing.description}}</p>
 
-        <!-- <div *ngIf="isOwner" class="listings-buttons">
-            <a href="/edit/${listing.objectId}" class="button-list">Edit</a>
-            <a @click=${onDelete} href="javascript:void(0)" class="button-list">Delete</a>
-        </div> -->
+        <div *ngIf="isOwner" class="listings-buttons">
+            <a [routerLink]="['/edit', listing.objectId]" class="button-list">Edit</a> 
+            <a (click)="delete()" class="button-list">Delete</a>
+        </div>
     </div>
 </section>

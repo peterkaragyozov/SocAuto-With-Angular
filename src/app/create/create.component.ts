@@ -18,7 +18,8 @@ export class CreateComponent {
   create(form: NgForm): void {
     if (form.invalid) { return; }
     this.listingService.createListing(form.value).subscribe({
-      next: () => {
+      next: (test) => {
+        console.log(test);
         this.router.navigate(['/all-listings']);
       },
       error: (err) => {

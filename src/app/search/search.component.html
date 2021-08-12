@@ -1,13 +1,30 @@
 <section id="search-cars">
     <h1>Filter by year</h1>
-    <div class="container">
-        <input id="search-input" type="text" name="search" placeholder="Enter desired production year">
+    <form #form="ngForm" class="container" (ngSubmit)="search(form)">
+        <input #yearInput="ngModel" ngModel id="search-input" type="text" name="year" placeholder="Enter desired production year">
         <button class="button-list">Search</button>
-    </div>
+    </form>
     <h2>Results:</h2>
     <div class="listings">
+
+    <div *ngFor="let car of listings" class="listing">
+      <div class="preview">
+        <img src="{{car.imageUrl}}" />
+      </div>
+      <h2>{{ car.brand }} {{ car.model }}</h2>
+      <div class="info">
+        <div class="data-info">
+          <h3>Year: {{ car.year }}</h3>
+          <h3>Country: {{ car.country }}</h3>
+        </div>
+        <div class="data-buttons">
+          <a [routerLink]="['/details', car.objectId]" class="button-carDetails">Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display if there are no listings -->
+    <p *ngIf="!listings" class="no-cars">No results.</p>
         
-        <!-- ${cars.length == 0 ? html`<p class="no-cars"> No results.</p>` : cars.map(carTemplate)}
-         -->
     </div>
 </section>

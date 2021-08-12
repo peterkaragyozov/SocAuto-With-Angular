@@ -20,18 +20,14 @@ export class CatalogComponent {
   constructor( 
     private listingService: ListingService,
     private userService: UserService
-    ) { 
-      this.userService.getMyProfile().subscribe({
-        error: () => {
-          this.userService.user = null;
-        }
-      });
+    ) 
+    { 
     this.fetchListings();
   }
 
   fetchListings(): void {
     this.listings = undefined;
-    this.listingService.getAllListings().subscribe(listings => this.listings = listings);
+    this.listingService.getAllListings().subscribe(listings => this.listings = listings.results);
   }
 
 }

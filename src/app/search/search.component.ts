@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ListingService } from '../listing.service';
 
 @Component({
   selector: 'app-search',
@@ -7,7 +9,22 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
 
-  constructor() { }
+  listings: any | undefined;
 
+  constructor(
+    private listingService: ListingService,
+  ) { }
+
+  search(form: NgForm) {
+    const { year } = form.value;
+    this.listingService.search(year).subscribe({
+      next: (listing: any) => {
+        this.listings = listing.results;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
 }
