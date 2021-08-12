@@ -25,6 +25,7 @@ export class LoginComponent {
         this.router.navigate([redirectUrl]);
       },
       error: (err) => {
+        alert("Wrong username or password! Try again.");
         console.log(err);
       },
     });

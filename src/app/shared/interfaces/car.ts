@@ -7,4 +7,5 @@ export interface ICar {
   imageUrl: string;
   country: string;
   owner: {};
+  createdAt: string
 }

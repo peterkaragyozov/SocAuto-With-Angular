@@ -45,6 +45,7 @@ export class UserService {
   }
 
   logout() {
+    Options.options.headers['X-Parse-Session-Token'] = '';
     return this.http.post<IUser>(host + '/logout', {}, Options.options).pipe(tap(() => this.user = null));
   }
   

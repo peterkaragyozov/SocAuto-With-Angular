@@ -12,6 +12,9 @@ import { UserService } from '../user/user.service';
 export class CatalogComponent {
 
   listings: ICar[] | undefined;
+  currentPage: number = 1;
+  itemsPerPage: number = 6;
+  totalItems: number = 0;
 
   get isAuthenticating(): boolean {
     return this.userService.user === undefined;
@@ -27,7 +30,31 @@ export class CatalogComponent {
 
   fetchListings(): void {
     this.listings = undefined;
-    this.listingService.getAllListings().subscribe(listings => this.listings = listings.results);
+    this.listingService.getAllListings().subscribe(listings => {
+      
+      
+      const sortedResult = listings.results.sort(function(a:ICar, b:ICar){ return b.createdAt.localeCompare(a.createdAt) });
+      this.totalItems = sortedResult.length;
+      const toReturn = sortedResult.slice((this.currentPage * this.itemsPerPage) - this.itemsPerPage, (this.currentPage * this.itemsPerPage));
+      this.listings = toReturn;
+    })
+  }
+
+  nextPage(): void{
+    let totalPages = this.totalItems / this.itemsPerPage;
+    if (this.currentPage < totalPages ) {
+      this.currentPage++;
+      this.fetchListings();
+    }
+
+  }
+
+  previousPage(): void{
+    if ( this.currentPage > 1) {
+      this.currentPage--;
+      this.fetchListings();
+    }
+
   }
 
 }

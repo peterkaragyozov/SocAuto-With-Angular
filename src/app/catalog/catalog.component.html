@@ -2,6 +2,16 @@
   <h1>Automobile Listings</h1>
   <div class="listings">
 
+    <!-- <mat-paginator [length]="100"
+              [pageSize]="10"
+              aria-label="Select page">
+</mat-paginator> -->
+  <div ngModel>
+    <button (click)="previousPage()">Left</button>
+    <p>{{currentPage}}</p>
+    <button  (click)="nextPage()">Right</button>
+
+  </div>
 
     <!-- <div>
     ${page > 1 ? html`<a class="button-list" href="/all-listings?page=${page - 1}"> &lt;  </a>` : ''}
