@@ -4,7 +4,8 @@
         <input #yearInput="ngModel" ngModel id="search-input" type="text" name="year" placeholder="Enter desired production year">
         <button class="button-list">Search</button>
     </form>
-    <h2>Results:</h2>
+
+
     <div class="listings">
 
     <div *ngFor="let car of listings" class="listing">
@@ -24,7 +25,7 @@
     </div>
 
     <!-- Display if there are no listings -->
-    <p *ngIf="!listings" class="no-cars">No results.</p>
+    <p *ngIf="listings.length == 0" class="no-cars">No results.</p>
         
     </div>
 </section>

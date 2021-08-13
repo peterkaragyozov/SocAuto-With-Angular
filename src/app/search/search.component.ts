@@ -20,6 +20,7 @@ export class SearchComponent {
     this.listingService.search(year).subscribe({
       next: (listing: any) => {
         this.listings = listing.results;
+        console.log(this.listings)
       },
       error: (err) => {
         console.log(err);
