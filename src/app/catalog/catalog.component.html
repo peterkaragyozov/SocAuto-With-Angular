@@ -5,30 +5,34 @@
 
     <div *ngIf="!listings">Loading... Please wait!</div>
 
-    <div *ngFor="let car of listings" class="listing">
-      <div class="preview">
-        <img src="{{car.imageUrl}}" />
-      </div>
-      <h2>{{ car.brand }} {{ car.model }}</h2>
-      <div class="info">
-        <div class="data-info">
-          <h3>Year: {{ car.year }}</h3>
-          <h3>Country: {{ car.country }}</h3>
+    <div *ngIf="listings">
+      <div *ngFor="let car of listings" class="listing">
+        <div class="preview">
+          <img src="{{car.imageUrl}}" />
         </div>
-        <div class="data-buttons">
-          <a [routerLink]="['/details', car.objectId]" class="button-carDetails">Details</a>
+        <h2>{{ car.brand }} {{ car.model }}</h2>
+        <div class="info">
+          <div class="data-info">
+            <h3>Year: {{ car.year }}</h3>
+            <h3>Country: {{ car.country }}</h3>
+          </div>
+          <div class="data-buttons">
+            <a [routerLink]="['/details', car.objectId]" class="button-carDetails">Details</a>
+          </div>
         </div>
       </div>
+  
+      <!-- Display if there are no listings -->
+      <!-- <p *ngIf="!listings" class="no-cars">No cars in database.</p> -->
+  
+      <div ngModel>
+        <button (click)="previousPage()" class="button-list"> &lt;  </button>
+        <p class="current-page">{{currentPage}}</p>
+        <button  (click)="nextPage()" class="button-list"> &gt; </button>
+      </div>
+
     </div>
 
-    <!-- Display if there are no listings -->
-    <!-- <p *ngIf="!listings" class="no-cars">No cars in database.</p> -->
-
-    <div ngModel>
-      <button (click)="previousPage()" class="button-list"> &lt;  </button>
-      <p class="current-page">{{currentPage}}</p>
-      <button  (click)="nextPage()" class="button-list"> &gt; </button>
-    </div>
 
   </div>
 </section>
