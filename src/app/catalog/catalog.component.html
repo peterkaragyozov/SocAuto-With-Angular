@@ -2,24 +2,6 @@
   <h1>Automobile Listings</h1>
   <div class="listings">
 
-    <!-- <mat-paginator [length]="100"
-              [pageSize]="10"
-              aria-label="Select page">
-</mat-paginator> -->
-  <div ngModel>
-    <button (click)="previousPage()">Left</button>
-    <p>{{currentPage}}</p>
-    <button  (click)="nextPage()">Right</button>
-
-  </div>
-
-    <!-- <div>
-    ${page > 1 ? html`<a class="button-list" href="/all-listings?page=${page - 1}"> &lt;  </a>` : ''}
-    Page ${page} / ${pages} 
-    ${page < pages ? html`<a class="button-list" href="/all-listings?page=${page + 1}"> &gt; </a>` : ''}
-    </div> -->
-
-    <!-- Display all listings -->
 
     <div *ngIf="!listings">Loading... Please wait!</div>
 
@@ -40,13 +22,13 @@
     </div>
 
     <!-- Display if there are no listings -->
-    <p *ngIf="!listings" class="no-cars">No cars in database.</p>
+    <!-- <p *ngIf="!listings" class="no-cars">No cars in database.</p> -->
 
-    <!-- <div>
-        ${page > 1 ? html`<a class="button-list" href="/all-listings?page=${page - 1}">&lt; Previous </a>` : ''}
-        Page ${page} / ${pages} 
-        ${page < pages ? html`<a class="button-list" href="/all-listings?page=${page + 1}">Next &gt; </a>` : ''}
-    </div> -->
+    <div ngModel>
+      <button (click)="previousPage()" class="button-list"> &lt;  </button>
+      <p class="current-page">{{currentPage}}</p>
+      <button  (click)="nextPage()" class="button-list"> &gt; </button>
+    </div>
 
   </div>
 </section>

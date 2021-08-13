@@ -66,3 +66,31 @@ h3 {
     display: inline-block;
     font-size: 16px;
 }
+
+.button-list {
+    background-color: #e41616;
+    /* Red */
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+  }
+
+  .current-page {
+    background-color: #9e0000;
+    /* Red */
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+  }
