@@ -2,23 +2,26 @@
     <h1>My Listings</h1>
     <div class="listings">
 
+      <div *ngIf="listings">
         <div *ngFor="let car of listings" class="listing">
-            <div class="preview">
-              <img src="{{car.imageUrl}}" />
+          <div class="preview">
+            <img src="{{car.imageUrl}}" />
+          </div>
+          <h2>{{ car.brand }} {{ car.model }}</h2>
+          <div class="info">
+            <div class="data-info">
+              <h3>Year: {{ car.year }}</h3>
+              <h3>Country: {{ car.country }}</h3>
             </div>
-            <h2>{{ car.brand }} {{ car.model }}</h2>
-            <div class="info">
-              <div class="data-info">
-                <h3>Year: {{ car.year }}</h3>
-                <h3>Country: {{ car.country }}</h3>
-              </div>
-              <div class="data-buttons">
-                <a [routerLink]="['/details', car.objectId]" class="button-carDetails">Details</a>
-              </div>
+            <div class="data-buttons">
+              <a [routerLink]="['/details', car.objectId]" class="button-carDetails">Details</a>
             </div>
           </div>
-      
-          <p *ngIf="!listings" class="no-cars">You haven't listed any automobiles yet.</p>
+        </div>
+      </div>
+
+        
+          <p *ngIf="listings.length == 0" class="no-cars">You haven't listed any automobiles yet.</p>
         
     </div>
 </section>

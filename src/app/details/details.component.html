@@ -1,19 +1,27 @@
 <section id="listing-details">
-    <h1>Details</h1>
-    <div class="details-info">
-        <img src={{listing.imageUrl}}>
-        <hr>
-        <ul class="listing-props">
-            <li><span>Brand:</span>{{listing.brand}}</li>
-            <li><span>Model:</span>{{listing.model}}</li>
-            <li><span>Year:</span>{{listing.year}}</li>
-            <li><span>Country:</span>{{listing.country}}</li>
-        </ul>
-        <p class="description-para">{{listing.description}}</p>
 
-        <div *ngIf="isOwner" class="listings-buttons">
-            <a [routerLink]="['/edit', listing.objectId]" class="button-list">Edit</a> 
-            <a (click)="delete()" class="button-list">Delete</a>
+    <div *ngIf="!listing">Loading... Please wait!</div>
+
+    <div *ngIf="listing">
+        <h1>Details</h1>
+        <div class="details-info">
+            <img src={{listing.imageUrl}}>
+            <hr>
+            <ul class="listing-props">
+                <li><span>Brand:</span>{{listing.brand}}</li>
+                <li><span>Model:</span>{{listing.model}}</li>
+                <li><span>Year:</span>{{listing.year}}</li>
+                <li><span>Country:</span>{{listing.country}}</li>
+            </ul>
+            <p class="description-para">{{listing.description}}</p>
+    
+            <div *ngIf="isOwner" class="listings-buttons">
+                <a [routerLink]="['/edit', listing.objectId]" class="button-list">Edit</a> 
+                <a (click)="delete()" class="button-list">Delete</a>
+            </div>
         </div>
     </div>
+
+
+    
 </section>
