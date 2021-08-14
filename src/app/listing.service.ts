@@ -66,23 +66,3 @@ function createPointer(name: string, id: string) {
   function addOwner(object: ICar, userId: string) {
     object.owner = createPointer('_User', userId);   
   }
-
-
-
-// //Application-specific requests
-
-// //get all listings with pagination
-// export async function getAllListings(startIndex, itemsPerPage) {
-//     // ?order=createdAt&skip=${page}&limit=6
-//     const response = await api.get(host + `/classes/Automobile`);
-//     const results = response.results
-//     const sortedResult = results.sort(function(a, b){ return b.createdAt.localeCompare(a.createdAt) });
-//     const toReturn = sortedResult.slice(startIndex, startIndex + itemsPerPage);
-//     return toReturn;
-// }
-
-// //for pagination
-// export async function getCollectionSize() {
-//     const response = await api.get(host + '/classes/Automobile?count=1');
-//     return response.count;
-// }
