@@ -26,12 +26,13 @@
 
 .button-list {
     cursor: pointer;
+    box-sizing: border-box;
     background-color: #e41616;
     border-radius: 10px;
     border: none;
     color: white;
-    margin: auto;
-    padding: 11px 30px;
+    margin: auto 5px;
+    padding: 11px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
