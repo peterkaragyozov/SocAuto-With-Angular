@@ -15,9 +15,8 @@ SoftUni graduate project developed with Angular 12.
 ## Used Technologies
 * Angular CLI 12
 * TypeScript
-* rxjs
-* HTML 
-* CSS
+* HTML 5
+* CSS 3
 * Back4App
 
 ## Views (Pages)
