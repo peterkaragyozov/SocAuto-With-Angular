@@ -22,8 +22,8 @@ export class UserService {
 
   login(data: { username: string; password: string }) {
 
-    var result = this.http.post<IUser>(host + '/login', data, Options.options);
-    var test = result.pipe(tap((user) =>
+    const result = this.http.post<IUser>(host + '/login', data, Options.options);
+    const test = result.pipe(tap((user) =>
     {
       this.user = user;
       Options.options.headers['X-Parse-Session-Token'] = user.sessionToken;
@@ -51,7 +51,7 @@ export class UserService {
   }
   
   getMyProfile() {
-    var result = this.http.get<any>(host + '/users/me', Options.options);
+    const result = this.http.get<any>(host + '/users/me', Options.options);
     return result.pipe(tap((user) => 
     {
       this.user = user;
